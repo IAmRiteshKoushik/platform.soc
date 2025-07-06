@@ -83,7 +83,7 @@ const DevPoolDocs = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
                 <div className="bg-white/40 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:bg-white/50 transition-all duration-200">
                   <code className="text-lg font-bold block mb-2 text-slate-800">
                     /bounty &lt;amount&gt; @username
@@ -98,6 +98,15 @@ const DevPoolDocs = () => {
                   </code>
                   <p className="text-slate-600 text-sm">
                     Deduct points for misbehavior or rule violations
+                  </p>
+                </div>
+                <div className="bg-white/40 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:bg-white/50 transition-all duration-200">
+                  <code className="text-lg font-bold block mb-2 text-slate-800">
+                    /help @username
+                  </code>
+                  <p className="text-slate-600 text-sm">
+                    Acknowledge contributors who assisted others in issues or
+                    pull requests by awarding +1 to their help-base achievement.
                   </p>
                 </div>
               </div>
