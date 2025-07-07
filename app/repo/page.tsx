@@ -39,6 +39,17 @@ import {
   TabsTrigger,
 } from '../components/ui/tabs';
 
+/**
+ * Randomize array in-place using Durstenfeld shuffle algorithm: Complexity 0(n)
+ */
+function shuffleArray<T>(arr: T[]): T[] {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 type IssueFilterType = 'all' | 'claimed' | 'unclaimed' | 'completed' | 'active';
 // type IssueSortType = 'newest' | 'oldest' | 'bounty-high' | 'bounty-low';
 type IssueSortType = 'newest' | 'oldest';
@@ -108,12 +119,16 @@ const ReposPage = () => {
 
   const filteredRepositories = useMemo(() => {
     let filtered = [...repositories];
+
+    // Apply search filter
     if (repoSearchTerm.trim()) {
       const lower = repoSearchTerm.toLowerCase();
       filtered = filtered.filter((repo) =>
         repo.name.toLowerCase().includes(lower),
       );
     }
+
+    // Apply tech filter
     if (repoTechFilter) {
       filtered = filtered.filter((repo) =>
         repo.tech?.some(
@@ -121,6 +136,10 @@ const ReposPage = () => {
         ),
       );
     }
+
+    // Always shuffle the repositories
+    filtered = shuffleArray(filtered);
+
     return filtered;
   }, [repositories, repoSearchTerm, repoTechFilter]);
 
