@@ -10,6 +10,7 @@ import {
   TabsTrigger,
 } from '@/app/components/ui/tabs';
 import { ArrowRight, Github } from 'lucide-react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
@@ -46,6 +47,28 @@ const Dashboard = () => {
       </div>
       <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-[40%_minmax(0,1fr)] gap-8 items-start py-12 md:py-0 flex-grow">
         <div className="z-10 flex flex-col items-center md:items-start justify-center text-left py-0 md:py-12 md:h-[calc(100vh-80px)]">
+          <div className="flex flex-col items-center md:items-start gap-2 mb-6">
+            <p className="text-xs sm:text-sm text-white font-medium">
+              Brought to you by
+            </p>
+            <div className="flex items-center gap-4">
+              <Image
+                src="/amrita-reverse-logo.svg"
+                alt="Amrita Logo"
+                width={100}
+                height={0}
+                className="h-auto max-w-[100px] object-contain"
+              />
+              <Image
+                src="/acmlogonew.webp"
+                alt="ACM Logo"
+                width={60}
+                height={0}
+                className="h-auto max-w-[60px] object-contain"
+              />
+            </div>
+          </div>
+
           <h1 className="font-extrabold text-5xl tracking-tight sm:text-6xl md:text-5xl text-white">
             Amrita
           </h1>
@@ -141,6 +164,27 @@ const Dashboard = () => {
           </Tabs>
         </div>
       </div>
+      <footer className="w-full text-center py-4 mt-8 text-sm text-gray-950 font-medium ">
+        <span className="inline-flex items-center gap-2 justify-center">
+          <span className="text-red-400 animate-pulse">❤️</span>
+          <span>Powered by</span>
+          <a
+            href="https://github.com/Infinite-Sum-Games"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 underline underline-offset-4 hover:text-yellow-300 transition"
+          >
+            <Image
+              src="/Infinite Sum Games.jpeg.jpg"
+              alt="Infinite Sum Games Logo"
+              width={20}
+              height={20}
+              className="rounded-sm object-contain"
+            />
+            Infinite Sum Games
+          </a>
+        </span>
+      </footer>
     </div>
   );
 };
