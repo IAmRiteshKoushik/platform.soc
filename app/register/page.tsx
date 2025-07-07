@@ -213,7 +213,10 @@ export default function RegisterPage() {
           description: 'OTP seems to be expired. Please try registering again.',
           variant: 'destructive',
         });
-        router.push('/register');
+        setTimeout(() => {
+          router.push('/register');
+          router.refresh();
+        }, 400);
       } else if (error instanceof z.ZodError) {
         toast({
           title: 'Error',
@@ -221,12 +224,28 @@ export default function RegisterPage() {
           variant: 'destructive',
         });
       } else {
+        setFormData({
+          email: '',
+          github_username: '',
+          first_name: '',
+          middle_name: '',
+          last_name: '',
+        });
+        setErrors({});
+        setTouched({});
+        setShowOtpInput(false);
+        setOtp('');
+        setAccessToken('');
         toast({
           title: 'Error',
           description:
             error instanceof Error ? error.message : 'OTP verification failed',
           variant: 'destructive',
         });
+        setTimeout(() => {
+          router.push('/register');
+          router.refresh();
+        }, 400);
       }
     } finally {
       setIsVerifying(false);
@@ -270,7 +289,10 @@ export default function RegisterPage() {
         description: 'OTP seems to be expired. Please try registering again.',
         variant: 'destructive',
       });
-      router.push('/register');
+      setTimeout(() => {
+        router.push('/register');
+        router.refresh();
+      }, 400);
     }
   };
 
