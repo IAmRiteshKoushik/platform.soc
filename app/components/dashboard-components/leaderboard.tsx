@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'; // Import sorting icons
 import { MdCode, MdMonetizationOn } from 'react-icons/md';
 import { Card, CardDescription, CardHeader } from '../ui/card';
+import ParticipantAvatar from './ParticipantAvatar';
 
 export type TUserData = {
   fullName: string;
@@ -290,11 +291,7 @@ const Leaderboard = ({ user }: { user: AuthUser | null }) => {
             >
               <div className="flex flex-grow items-center gap-3 md:w-[50%]">
                 <div className="relative">
-                  <img
-                    src={`https://github.com/${data.username}.png`}
-                    alt={`${data.username}'s avatar`}
-                    className="h-8 w-8 rounded-full"
-                  />
+                  <ParticipantAvatar username={data.username} />
                   <span className="absolute -top-1 -left-1 flex h-5 w-5 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white ring-1 ring-white/30">
                     {index + 1}
                   </span>
