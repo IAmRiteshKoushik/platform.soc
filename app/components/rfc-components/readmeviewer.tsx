@@ -102,21 +102,9 @@ const ReadmeViewer = ({ owner, repoName, pdfLink }: ReadmeViewerProps) => {
 
   return (
     <Card className="bg-white/20 backdrop-blur-md border border-white/30 shadow-sm h-full flex flex-col">
-      <CardContent className="flex-1 flex flex-col mt-8">
-        <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-800 prose-p:font-medium prose-strong:text-gray-900 prose-strong:font-bold prose-code:text-gray-700 prose-code:bg-gray-100/50 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:font-semibold prose-pre:bg-gray-100/50 prose-pre:border prose-pre:border-gray-200/50 prose-pre:text-gray-700 prose-a:text-blue-600 prose-a:hover:text-blue-500 prose-a:font-semibold prose-li:text-gray-800 prose-li:font-medium prose-blockquote:text-gray-600 prose-blockquote:border-l-gray-400 flex-1 overflow-y-auto">
-          {readmeContent ? (
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {readmeContent}
-            </ReactMarkdown>
-          ) : (
-            <div className="text-center text-gray-600">
-              <FileText className="mx-auto mb-2 h-8 w-8 text-gray-600" />
-              <p>No README content available.</p>
-            </div>
-          )}
-        </div>
+      <CardContent className="flex-1 flex flex-col bg-accent rounded-xl p-4">
         {pdfLink && (
-          <div className="mt-4 flex flex-col items-start">
+          <div className="mt-4 mb-16 flex flex-col items-start">
             <p className="text-gray-800 mb-2">
               Additional project details are available in the PDF document.
             </p>
@@ -135,6 +123,18 @@ const ReadmeViewer = ({ owner, repoName, pdfLink }: ReadmeViewerProps) => {
             </Button>
           </div>
         )}
+        <div className="prose prose-lg max-w-none flex-1 overflow-y-auto bg-accent/40 prose-a:text-blue-600 prose-a:hover:text-blue-500 prose-a:font-semibold prose-li:text-gray-800 prose-li:font-medium prose-blockquote:text-gray-600 prose-blockquote:border-l-gray-400">
+          {readmeContent ? (
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {readmeContent}
+            </ReactMarkdown>
+          ) : (
+            <div className="text-center text-gray-600">
+              <FileText className="mx-auto mb-2 h-8 w-8 text-gray-600" />
+              <p>No README content available.</p>
+            </div>
+          )}
+        </div>
       </CardContent>
     </Card>
   );
