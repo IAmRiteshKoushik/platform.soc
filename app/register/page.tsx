@@ -238,10 +238,7 @@ export default function RegisterPage() {
         setAccessToken('');
         toast({
           title: 'Error',
-          description:
-            error instanceof Error
-              ? error.message
-              : 'OTP verification failed, Please try again.',
+          description: 'OTP verification failed, Please try again.',
           variant: 'destructive',
         });
         setTimeout(() => {
