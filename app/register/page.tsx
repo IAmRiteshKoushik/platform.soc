@@ -224,27 +224,11 @@ export default function RegisterPage() {
           variant: 'destructive',
         });
       } else {
-        setFormData({
-          email: '',
-          github_username: '',
-          first_name: '',
-          middle_name: '',
-          last_name: '',
-        });
-        setErrors({});
-        setTouched({});
-        setShowOtpInput(false);
-        setOtp('');
-        setAccessToken('');
         toast({
           title: 'Error',
           description: 'OTP verification failed, Please try again.',
           variant: 'destructive',
         });
-        setTimeout(() => {
-          router.push('/register');
-          router.refresh();
-        }, 400);
       }
     } finally {
       setIsVerifying(false);
