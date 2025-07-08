@@ -131,25 +131,33 @@ const DevPoolDocs = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30 hover:bg-white/50 transition-all duration-200">
-                    <code className="font-bold text-indigo-700">/bug</code>
+                    <code className="font-bold text-indigo-700">
+                      /bug @username
+                    </code>
                     <p className="text-slate-600 text-sm mt-1">
                       Mark bug-report issues for bug-hunting badges
                     </p>
                   </div>
                   <div className="bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30 hover:bg-white/50 transition-all duration-200">
-                    <code className="font-bold text-indigo-700">/impact</code>
+                    <code className="font-bold text-indigo-700">
+                      /impact @username
+                    </code>
                     <p className="text-slate-600 text-sm mt-1">
                       Flag high-impact pull requests
                     </p>
                   </div>
                   <div className="bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30 hover:bg-white/50 transition-all duration-200">
-                    <code className="font-bold text-indigo-700">/doc</code>
+                    <code className="font-bold text-indigo-700">
+                      /doc @username
+                    </code>
                     <p className="text-slate-600 text-sm mt-1">
                       Mark documentation pull requests
                     </p>
                   </div>
                   <div className="bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30 hover:bg-white/50 transition-all duration-200">
-                    <code className="font-bold text-indigo-700">/test</code>
+                    <code className="font-bold text-indigo-700">
+                      /test @username
+                    </code>
                     <p className="text-slate-600 text-sm mt-1">
                       Mark testing-related pull requests
                     </p>
