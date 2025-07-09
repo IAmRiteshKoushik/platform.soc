@@ -195,7 +195,29 @@ export default function RegisterPage() {
       // TODO: Initiate GitHub OAuth
       router.push('/welcome-page');
     } catch (error) {
-      if (error instanceof z.ZodError) {
+      if (error instanceof Error && error.message === 'internal-server-error') {
+        setFormData({
+          email: '',
+          github_username: '',
+          first_name: '',
+          middle_name: '',
+          last_name: '',
+        });
+        setErrors({});
+        setTouched({});
+        setShowOtpInput(false);
+        setOtp('');
+        setAccessToken('');
+        toast({
+          title: 'Error',
+          description: 'OTP seems to be expired. Please try registering again.',
+          variant: 'destructive',
+        });
+        setTimeout(() => {
+          router.push('/register');
+          router.refresh();
+        }, 400);
+      } else if (error instanceof z.ZodError) {
         toast({
           title: 'Error',
           description: 'OTP must be 6 digits',
@@ -204,8 +226,7 @@ export default function RegisterPage() {
       } else {
         toast({
           title: 'Error',
-          description:
-            error instanceof Error ? error.message : 'OTP verification failed',
+          description: 'OTP verification failed, Please try again.',
           variant: 'destructive',
         });
       }
@@ -216,28 +237,45 @@ export default function RegisterPage() {
 
   const handleResendOtp = async () => {
     if (!canResendOtp) return;
-
-    const result = await make_api_call({
-      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register/otp/resend`,
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    if (result.success) {
-      setCanResendOtp(false);
-      setResendTimer(300); // 5 minutes
-      toast({
-        title: 'Success',
-        description: 'OTP resent to your email',
+    try {
+      const result = await make_api_call({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register/otp/resend`,
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
-    } else {
+
+      if (result.success) {
+        setCanResendOtp(false);
+        setResendTimer(300); // 5 minutes
+        toast({
+          title: 'Success',
+          description: 'OTP resent to your email',
+        });
+      }
+    } catch (error) {
+      setFormData({
+        email: '',
+        github_username: '',
+        first_name: '',
+        middle_name: '',
+        last_name: '',
+      });
+      setErrors({});
+      setTouched({});
+      setShowOtpInput(false);
+      setOtp('');
+      setAccessToken('');
       toast({
         title: 'Error',
-        description: result.error || 'Failed to resend OTP',
+        description: 'OTP seems to be expired or Wrong. Please try again.',
         variant: 'destructive',
       });
+      setTimeout(() => {
+        router.push('/register');
+        router.refresh();
+      }, 400);
     }
   };
 
