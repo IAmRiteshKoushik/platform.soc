@@ -223,27 +223,35 @@ const Leaderboard = ({ user }: { user: AuthUser | null }) => {
       </div>
 
       <div className="flex items-center rounded-xl bg-white/20 px-3 py-2 font-medium text-gray-900 shadow-sm">
-        <div className="flex-grow font-medium md:w-[50%] pl-2">Name</div>
-        <div className="w-[25%] text-center hidden md:flex justify-center">
-          <button
-            type="button"
-            onClick={() => sortData('PRs')}
-            className="flex items-center cursor-pointer justify-center gap-1 rounded-3xl bg-blue-500/50 px-3 py-1 font-medium text-gray-900 shadow-sm transition-all duration-200 hover:bg-blue-500/70 hover:text-gray-800 hover:shadow-md"
-          >
-            <MdCode className="mr-1 text-gray-900" /> PRs
-            {getSortIcon('PRs')}
-          </button>
+        <div
+          className={`flex-grow font-medium pl-2 ${currentView === 'participants' ? '' : 'md:w-[50%]'}`}
+        >
+          Name
         </div>
-        <div className="w-auto md:w-[25%] flex justify-end pr-1">
-          <button
-            type="button"
-            onClick={() => sortData('Bounty')}
-            className="flex items-center cursor-pointer gap-1 rounded-3xl bg-amber-500/50 px-3 py-1 font-medium text-gray-900 shadow-sm transition-all duration-200 hover:bg-amber-500/70 hover:text-gray-800 hover:shadow-md"
-          >
-            <MdMonetizationOn className="mr-1 text-gray-900" /> Bounty
-            {getSortIcon('Bounty')}
-          </button>
-        </div>
+        {currentView === 'leaderboard' && (
+          <>
+            <div className="w-[25%] text-center hidden md:flex justify-center">
+              <button
+                type="button"
+                onClick={() => sortData('PRs')}
+                className="flex items-center cursor-pointer justify-center gap-1 rounded-3xl bg-blue-500/50 px-3 py-1 font-medium text-gray-900 shadow-sm transition-all duration-200 hover:bg-blue-500/70 hover:text-gray-800 hover:shadow-md"
+              >
+                <MdCode className="mr-1 text-gray-900" /> PRs
+                {getSortIcon('PRs')}
+              </button>
+            </div>
+            <div className="w-auto md:w-[25%] flex justify-end pr-1">
+              <button
+                type="button"
+                onClick={() => sortData('Bounty')}
+                className="flex items-center cursor-pointer gap-1 rounded-3xl bg-amber-500/50 px-3 py-1 font-medium text-gray-900 shadow-sm transition-all duration-200 hover:bg-amber-500/70 hover:text-gray-800 hover:shadow-md"
+              >
+                <MdMonetizationOn className="mr-1 text-gray-900" /> Bounty
+                {getSortIcon('Bounty')}
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       <ScrollArea className="mt-2 min-h-0 grow overflow-y-auto">
@@ -289,7 +297,9 @@ const Leaderboard = ({ user }: { user: AuthUser | null }) => {
                 backdrop-blur-md w-full text-left pointer-events-none`
               }
             >
-              <div className="flex flex-grow items-center gap-3 md:w-[50%]">
+              <div
+                className={`flex flex-grow items-center gap-3 ${currentView === 'participants' ? '' : 'md:w-[50%]'}`}
+              >
                 <div className="relative">
                   <ParticipantAvatar username={data.username} />
                   <span className="absolute -top-1 -left-1 flex h-5 w-5 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white ring-1 ring-white/30">
@@ -303,12 +313,16 @@ const Leaderboard = ({ user }: { user: AuthUser | null }) => {
                   <div className="text-gray-600 text-sm">@{data.username}</div>
                 </div>
               </div>
-              <div className="w-[25%] text-center hidden md:block">
-                {+data._count.Solution}
-              </div>
-              <div className="w-auto text-right md:w-[25%] pr-1 font-bold md:text-right">
-                {data.bounty}
-              </div>
+              {currentView === 'leaderboard' && (
+                <>
+                  <div className="w-[25%] text-center hidden md:block">
+                    {+data._count.Solution}
+                  </div>
+                  <div className="w-auto text-right md:w-[25%] pr-1 font-bold md:text-right">
+                    {data.bounty}
+                  </div>
+                </>
+              )}
             </button>
           ))
         )}
